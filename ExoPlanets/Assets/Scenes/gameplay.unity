@@ -102,6 +102,7 @@ Transform:
   m_LocalPosition: {x: -4.98076344, y: -2.21528864, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 449179173}
   - {fileID: 1425335931}
   m_Father: {fileID: 0}
 --- !u!114 &414273962
@@ -143,6 +144,32 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: 1.80999994, y: 1.77999997}
   m_Center: {x: 0, y: 0}
+--- !u!1 &449179172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 449179173}
+  m_Layer: 0
+  m_Name: Ground_collider
+  m_TagString: Untagged
+  m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &449179173
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 449179172}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.618013382, y: -1.00916147, z: 0}
+  m_LocalScale: {x: 1.4878124, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 414273961}
 --- !u!1 &1425335930
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,9 +230,9 @@ GameObject:
   - 4: {fileID: 1472530033}
   - 212: {fileID: 1472530035}
   - 61: {fileID: 1472530034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: floor
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -263,7 +290,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1549365831}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Ground
   m_Icon: {fileID: 0}
