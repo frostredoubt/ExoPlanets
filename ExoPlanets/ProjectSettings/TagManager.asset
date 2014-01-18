@@ -6,6 +6,18 @@ TagManager:
   - 
   - Level
   - LRRoomTemplate
+  - LBexit
+  - LMexit
+  - LTexit
+  - TLexit
+  - TMexit
+  - TRexit
+  - RTexit
+  - RMexit
+  - RBexit
+  - BLexit
+  - BMexit
+  - BRexit
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
