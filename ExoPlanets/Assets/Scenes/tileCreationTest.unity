@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileEmpty: {fileID: 100000, guid: d320a26f1978c934cb9e3e93d945dd60, type: 2}
   tileFloor: {fileID: 100000, guid: ceb0f874b6e6f624b9a5c0a1ba22486f, type: 2}
+  levelTypeLabel: {fileID: 100000, guid: bd45c747a378e4bd3a021e50f90e687e, type: 2}
 --- !u!4 &382992294
 Transform:
   m_ObjectHideFlags: 0
