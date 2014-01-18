@@ -183,7 +183,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileEmpty: {fileID: 100000, guid: d320a26f1978c934cb9e3e93d945dd60, type: 2}
   tileFloor: {fileID: 100000, guid: ceb0f874b6e6f624b9a5c0a1ba22486f, type: 2}
-  levelTypeLabel: {fileID: 0}
+  levelTemplates:
+  - {fileID: 100052, guid: 6a2b0f8f670a642b1a62e147309ff193, type: 2}
+  - {fileID: 100760, guid: 09ae2d3f90bfc4b608a10204fc7cb741, type: 2}
+  - {fileID: 100000, guid: 4dcf3665b08024b54852f2742246dfc4, type: 2}
 --- !u!4 &1407968989
 Transform:
   m_ObjectHideFlags: 0

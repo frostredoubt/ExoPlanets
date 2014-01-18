@@ -11515,10 +11515,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d86b11686f0125940a5ee1b0eb735028, type: 3}
+  m_Script: {fileID: 11500000, guid: fb83353bca0b7dc42b63abfe8b9d723a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SupportedExits: 0b000000050000000600000008000000
+  supportedExits: 00000000020000000300000006000000
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
