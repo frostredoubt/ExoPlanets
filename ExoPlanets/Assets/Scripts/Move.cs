@@ -52,8 +52,7 @@ public class Move : MonoBehaviour {
         // Jump
         Transform ground = transform.Find("Ground_collider");
         bool hit = Physics2D.Linecast(transform.position, ground.position, 1 << LayerMask.NameToLayer("Ground"));
-        Debug.Log(hit);
-        if (hit)
+        if (Jump_pressed && hit)
         {
             gameObject.rigidbody2D.AddForce(new Vector2(0, Jump_Force));
             Debug.DrawLine(transform.position, ground.position);
