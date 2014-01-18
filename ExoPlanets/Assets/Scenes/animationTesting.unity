@@ -929,18 +929,6 @@ Prefab:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
-    - target: {fileID: 21200016, guid: 027fc66f0f344c54fae1ef2803599861, type: 2}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 21200014, guid: 027fc66f0f344c54fae1ef2803599861, type: 2}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 21200012, guid: 027fc66f0f344c54fae1ef2803599861, type: 2}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 027fc66f0f344c54fae1ef2803599861, type: 2}
   m_RootGameObject: {fileID: 586207902}
