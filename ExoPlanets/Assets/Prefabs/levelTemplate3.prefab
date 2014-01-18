@@ -2166,7 +2166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86b11686f0125940a5ee1b0eb735028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SupportedExits: 
+  SupportedExits: 000000000100000002000000090000000a0000000b0000000300000005000000
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
