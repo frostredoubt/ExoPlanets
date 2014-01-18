@@ -5,39 +5,29 @@ public class Move : MonoBehaviour {
 
     public int H_Force      = 80;
     public int Jump_Force   = 1000;
-    
-    private bool jumping = false;
+    public CharacterController CC;
+     
+    private Vector3 Frame_movement;
 
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    bool ground_intersect = Physics2D.Linecast(transform.position, transform.Find("Ground_collider").position, 1 << LayerMask.NameToLayer("Ground") );
-        if( ground_intersect && Input.GetButtonDown("Jump") )
-            jumping = true;
+        Frame_movement.Set(0, 0, 0);
+        gameObject.transform.Translate(new Vector3(0, -1 * Time.deltaTime, 0));
 	}
 
-    void FixedUpdate()
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        float H_Movement = Input.GetAxis("Horizontal");
+        Debug.Log("Trigger");
+        gameObject.transform.Translate(0, 2, 0);
+    }
 
-        if (H_Movement < 0.1)
-        {
-            if (rigidbody2D.velocity.y == 0)
-            {
-                rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.y);
-            }
-        }
-
-        rigidbody2D.AddForce(new Vector2(H_Movement * H_Force, 0));
-
-        if (jumping)
-        {
-            rigidbody2D.AddForce(new Vector2(0, Jump_Force));
-            jumping = false;
-        }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collision"); 
+        gameObject.transform.Translate(0, 2, 0);
     }
 }
