@@ -83,72 +83,66 @@ public class LevelGenerator : MonoBehaviour
     /// </summary>
     private void GenerateLevel()
     {
-        TemplateRequirementSet[,] templateRequirements = GenerateTemplates(LEVEL_TEMPLATE_WIDTH, LEVEL_TEMPLATE_HEIGHT);
+        TemplateRequirementSet[,] templateRequirements = GenerateTemplateRequirements(LEVEL_TEMPLATE_WIDTH, LEVEL_TEMPLATE_HEIGHT); // Generate a required path through the level
 
-        StringBuilder test = new StringBuilder();
-        /*
-        for (int i = 0; i < templateRequirements.GetLength(0); i += 1)
+        for (int i = 0; i < LEVEL_TEMPLATE_WIDTH; i += 1) // Loop over all the templates in the level
         {
-            test.
-        }*/
+            for (int j = 0; j < LEVEL_TEMPLATE_HEIGHT; j += 1)
+            {
+                int base_x = i * Template.TEMPLATE_TILE_WIDTH;
+                int base_y = j * Template.TEMPLATE_TILE_HEIGHT;
 
-        //for (int i = 0; i < LEVEL_TEMPLATE_WIDTH; i += 1)
-        //{
-        //    for (int j = 0; j < LEVEL_TEMPLATE_HEIGHT; j += 1)
-        //    {
-        //        int base_x = i * TEMPLATE_TILE_WIDTH;
-        //        int base_y = j * TEMPLATE_TILE_HEIGHT;
-        //        //Debug.Log (roomTypes[i, j].ToString() + " " + base_x.ToString () + " " + base_y.ToString());
+                bool hasLeftRightExit = templateRequirements[i, j].exitDirections.Contains(Template.Direction.Left) || templateRequirements[i, j].exitDirections.Contains(Template.Direction.Right);
+                bool hasTopExit = templateRequirements[i, j].exitDirections.Contains(Template.Direction.Top);
+                bool hasBottomExit = templateRequirements[i, j].exitDirections.Contains(Template.Direction.Bottom);
 
-        //        bool has_left_right_exit = roomTypes[i, j] > 0;
-        //        bool has_top_exit = roomTypes[i, j] == 2;
-        //        bool has_bottom_exit = roomTypes[i, j] == 3 || (roomTypes[i, j] == 2 && j > 0 && roomTypes[i, j - 1] == 2);
+                for (int x = 0; x < Template.TEMPLATE_TILE_WIDTH; x += 1) // Loop over all the tiles in an individual template...TODO: Turn this into it's own routine
+                {
+                    for (int y = 0; y < Template.TEMPLATE_TILE_HEIGHT; y += 1)
+                    {
+                        int full_x = base_x + x;
+                        int full_y = base_y + y;
+                        
+                        /*
+                        if ((y == 7 || y == 8) && hasLeftRightExit)
+                        {
+                            tiles[full_x, full_y].type = Tile.TileOption.Floor;
+                        }
+                        else if ((x == 7 || x == 8) && y > 8 && has_top_exit)
+                        {
+                            tiles[full_x, full_y].type = Tile.TileOption.Floor;
+                        }
+                        else if ((x == 7 || x == 8) && y < 7 && has_bottom_exit)
+                        {
+                            tiles[full_x, full_y].type = Tile.TileOption.Floor;
+                        }
 
-        //        for (int x = 0; x < TEMPLATE_TILE_WIDTH; x += 1)
-        //        {
-        //            for (int y = 0; y < TEMPLATE_TILE_HEIGHT; y += 1)
-        //            {
-        //                int full_x = base_x + x;
-        //                int full_y = base_y + y;
+                        GameObject prefab = tiles[full_x, full_y].type == Tile.TileOption.Floor ? tileFloor : tileEmpty;
 
-        //                if ((y == 7 || y == 8) && has_left_right_exit)
-        //                {
-        //                    Debug.Log("happens");
-        //                    tiles[full_x, full_y].type = Tile.TileOption.Floor;
-        //                }
-        //                else if ((x == 7 || x == 8) && y > 8 && has_top_exit)
-        //                {
-        //                    tiles[full_x, full_y].type = Tile.TileOption.Floor;
-        //                }
-        //                else if ((x == 7 || x == 8) && y < 7 && has_bottom_exit)
-        //                {
-        //                    tiles[full_x, full_y].type = Tile.TileOption.Floor;
-        //                }
+                        tileComponents[full_x, full_y] = Instantiate(prefab, new Vector3(full_x, full_y), Quaternion.identity) as GameObject;
+                        tileComponents[full_x, full_y].transform.parent = this.transform;
+                        */
 
-        //                GameObject prefab = tiles[full_x, full_y].type == Tile.TileOption.Floor ? tileFloor : tileEmpty;
+                    }
+                }
 
-        //                tileComponents[full_x, full_y] = Instantiate(prefab, new Vector3(full_x, full_y), Quaternion.identity) as GameObject;
-        //                tileComponents[full_x, full_y].transform.parent = this.transform;
-        //            }
-        //        }
-
-        //        // Add a room label for debugging purposes (does not work)
-        //        /*GameObject label = Instantiate(levelTypeLabel, new Vector3(base_x, base_y), Quaternion.identity) as GameObject;
-        //        GUIText text = label.GetComponent<GUIText>();
-        //        text.text = roomTypes[i, j].ToString();
-        //        text.transform.parent = this.transform;*/
-        //    }
-        //}
+                // Add a room label for debugging purposes (does not work)
+                /*GameObject label = Instantiate(levelTypeLabel, new Vector3(base_x, base_y), Quaternion.identity) as GameObject;
+                GUIText text = label.GetComponent<GUIText>();
+                text.text = roomTypes[i, j].ToString();
+                text.transform.parent = this.transform;*/
+            }
+        }
 
         return;
     }
 
     /// <summary>
-    /// Generates the templates used by a level.
+    /// Generates a required path through the level and all associated template exits, as well as the level entrance and exit.
     /// </summary>
     /// <param name="levelTemplateHeight">The height of the level to generate in templates.</param>
     /// <param name="levelTemplateWidth">The width of the level to generate in templates.</param>
-    private TemplateRequirementSet[,] GenerateTemplates(int levelTemplateHeight, int levelTemplateWidth)
+    private TemplateRequirementSet[,] GenerateTemplateRequirements(int levelTemplateHeight, int levelTemplateWidth)
     {
         TemplateRequirementSet[,] templateRequirements = new TemplateRequirementSet[levelTemplateHeight, levelTemplateWidth];
         Template.Direction? lastDirection = null;
@@ -184,12 +178,14 @@ public class LevelGenerator : MonoBehaviour
                 case Template.Direction.Right:
                     currentColumn += 1;
                     break;
-                case Template.Direction.Up:
+                case Template.Direction.Top:
                     currentRow += 1;
                     break;
                 default:
                     throw new InvalidOperationException("Selected move direction is invalid for the current state of the level generator.");
             }
+            templateRequirements[currentRow, currentColumn].exitDirections.Add(Template.GetDirectionOpposite(moveDirection.Value)); // Add the move direction
+            lastDirection = moveDirection;
         }
     }
 
@@ -220,10 +216,10 @@ public class LevelGenerator : MonoBehaviour
             randomUpper += 2;
         }
 
-        validDirections.Add(Template.Direction.Up); // Moving upwards is always a valid "choice", but if chosen on the top row, we return null (which tells the map to place an exit)
+        validDirections.Add(Template.Direction.Top); // Moving upwards is always a valid "choice", but if chosen on the top row, we return null (which tells the map to place an exit)
         
         chosenDirection = validDirections[UnityEngine.Random.Range(0, randomUpper)];
-        if (chosenDirection == Template.Direction.Up && currentRow == levelTemplateHeight - 1) // If we're moving up on the final row, simply terminate
+        if (chosenDirection == Template.Direction.Top && currentRow == levelTemplateHeight - 1) // If we're moving up on the final row, simply terminate
         {
             return null;
         }

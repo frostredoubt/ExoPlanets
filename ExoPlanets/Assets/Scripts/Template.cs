@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -32,7 +33,7 @@ public static class Template
         /// <summary>
         /// A template-step vertically updwards.
         /// </summary>
-        Up
+        Top
 
     }
 
@@ -137,6 +138,27 @@ public static class Template
     /// </summary>
     public const int TEMPLATE_TILE_HEIGHT = 16;
 
+    /// <summary>
+    /// Get the opposite direction of a provided direction.
+    /// </summary>
+    /// <param name="direction">The direction to get the opposite of.</param>
+    /// <returns>The opposite direction of the current direction.</returns>
+    public static Direction GetDirectionOpposite(Direction direction)
+    {
+        switch (direction)
+        {
+            case Direction.Bottom:
+                return Direction.Top;
+            case Direction.Left:
+                return Direction.Right;
+            case Direction.Right:
+                return Direction.Left;
+            case Direction.Top:
+                return Direction.Bottom;
+            default:
+                throw new ArgumentException("Unable to provide opposite direction for invalid input.");
+        }
+    }
 }
 
 /// <summary>
@@ -159,7 +181,7 @@ public class TemplateRequirementSet
     /// Create a template that has no exit direction or feature requirements.
     /// </summary>
     public TemplateRequirementSet()
-        : this(new List<Template.Direction>(), new List<Template.Feature>())
+        : this(new HashSet<Template.Direction>(), new HashSet<Template.Feature>())
     {
         return;
     }
@@ -169,7 +191,7 @@ public class TemplateRequirementSet
     /// </summary>
     /// <param name="exitDirections">The list of directions that require an exit for the template.</param>
     public TemplateRequirementSet(IEnumerable<Template.Direction> exitDirections)
-        : this(exitDirections, new List<Template.Feature>())
+        : this(exitDirections, new HashSet<Template.Feature>())
     {
         return;
     }
